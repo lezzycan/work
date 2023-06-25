@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:work/src/utils/theme.dart';
+import 'package:work/src/views/users_and_permissions/users_and_permissions.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +11,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      darkTheme: ThemeProvider().darkTheme,
+      theme: ThemeProvider().lightTheme,
+      themeMode: ThemeMode.light,
+      home: const UsersAndPermission(),
     );
   }
 }
