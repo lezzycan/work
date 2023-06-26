@@ -11,7 +11,7 @@ class _CreateBusinessLastPageState extends State<CreateBusinessLastPage> {
   late final TextEditingController businessTaglineController;
   late final TextEditingController dateCreatedController;
   late final TextEditingController aboutBusinessController;
-  
+
   @override
   initState() {
     businessTaglineController = TextEditingController();
@@ -57,8 +57,10 @@ class _CreateBusinessLastPageState extends State<CreateBusinessLastPage> {
                         const Icon(Icons.arrow_back),
                         Column(
                           children: [
-                            Text('About your business',
-                                style: Theme.of(context).textTheme.bodyLarge),
+                            Text(
+                              'About your business',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
                             const SizedBox(
                               height: 8,
                             ),
@@ -123,14 +125,10 @@ class _CreateBusinessLastPageState extends State<CreateBusinessLastPage> {
                       controller: businessTaglineController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        label: Column(
-                          children: [
-                            Text(
-                              'About business',
-                              textAlign: TextAlign.start,
-                            ),
-                          ],
+                        label: Text(
+                          'About business',
                         ),
+                        alignLabelWithHint: true,
                       ),
                     ),
                     const SizedBox(
@@ -165,7 +163,8 @@ class _CreateBusinessLastPageState extends State<CreateBusinessLastPage> {
                           color: Color(0xFF781596),
                         ),
                       ),
-                    )
+                    ),
+                   
                   ],
                 ),
               ),

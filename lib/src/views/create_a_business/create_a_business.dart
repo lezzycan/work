@@ -14,17 +14,13 @@ class _CreateABusinessState extends State<CreateABusiness> {
   late final TextEditingController addressController;
   late final TextEditingController cityController;
   late final TextEditingController stateController;
+  late final TextEditingController dropdownController;
 
   late final TextEditingController phoneController;
 
-  var _focus = FocusNode();
-  var registrationTypeOffstage = true;
-  String registrationType = '';
-  var businessTypeOffstage = true;
-  var businessType = '';
-
   @override
   void initState() {
+    dropdownController = TextEditingController();
     stateController = TextEditingController();
     phoneController = TextEditingController();
     businessNameController = TextEditingController();
@@ -36,6 +32,7 @@ class _CreateABusinessState extends State<CreateABusiness> {
 
   @override
   void dispose() {
+    dropdownController.dispose();
     stateController.dispose();
     phoneController.dispose();
     businessNameController.dispose();
@@ -101,205 +98,47 @@ class _CreateABusinessState extends State<CreateABusiness> {
                     const SizedBox(
                       height: 24,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        businessTypeOffstage = true;
-                        registrationTypeOffstage
-                            ? registrationTypeOffstage = false
-                            : registrationTypeOffstage = true;
-                        setState(() {});
+                    DropdownButtonFormField<String>(
+                      dropdownColor: Colors.white,
+                      value: null,
+                      items: ['Business Name', 'CAC Number', 'SMEDAN Number']
+                          .map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropdownController.text = newValue!;
+                        });
                       },
-                      child: TextField(
-                        focusNode: _focus,
-                        enabled: false,
-                        decoration: InputDecoration(
-                          suffixIcon: RotatedBox(
-                            quarterTurns: registrationTypeOffstage ? 1 : 3,
-                            child: const Icon(Icons.arrow_forward_ios),
-                          ),
-                          label: Text(
-                            registrationType.isEmpty
-                                ? 'Registration Type(Optional)'
-                                : registrationType,
-                          ),
-                          labelStyle: registrationType.isEmpty
-                              ? const TextStyle()
-                              : const TextStyle(color: Colors.black),
-                          border: const OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    Offstage(
-                      offstage: registrationTypeOffstage,
-                      child: Container(
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 3,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  registrationTypeOffstage = true;
-                                  registrationType = 'Business Name';
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 16.0,
-                                  top: 8,
-                                  bottom: 8,
-                                ),
-                                child: Text(
-                                  'Business Name',
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  registrationTypeOffstage = true;
-                                  registrationType = 'CAC Number';
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 16.0,
-                                  top: 8,
-                                  bottom: 8,
-                                ),
-                                child: Text(
-                                  'CAC Number',
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  registrationTypeOffstage = true;
-                                  registrationType = 'SMEDAN Number';
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 16.0,
-                                  top: 8,
-                                  bottom: 8,
-                                ),
-                                child: Text(
-                                  'SMEDAN Number',
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Registration Type(Optional)',
                       ),
                     ),
                     const SizedBox(
                       height: 24,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        registrationTypeOffstage = true;
-                        businessTypeOffstage
-                            ? businessTypeOffstage = false
-                            : businessTypeOffstage = true;
-                        setState(() {});
+                    DropdownButtonFormField<String>(
+                      dropdownColor: Colors.white,
+                      value: null,
+                      items: ['Fashion Designer', 'E-commerce owner']
+                          .map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropdownController.text = newValue!;
+                        });
                       },
-                      child: TextField(
-                        enabled: false,
-                        decoration: InputDecoration(
-                          suffixIcon: RotatedBox(
-                            quarterTurns: businessTypeOffstage ? 1 : 3,
-                            child: const Icon(Icons.arrow_forward_ios),
-                          ),
-                          label: Text(
-                            businessType.isEmpty
-                                ? 'Business Type'
-                                : businessType,
-                          ),
-                          labelStyle: registrationType.isEmpty
-                              ? const TextStyle()
-                              : const TextStyle(color: Colors.black),
-                          border: const OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    Offstage(
-                      offstage: businessTypeOffstage,
-                      child: Container(
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  registrationTypeOffstage = true;
-                                  businessTypeOffstage = true;
-                                  businessType = 'Fashion designer';
-                                });
-                              },
-                              child: const Padding(
-                                padding: EdgeInsets.only(
-                                  left: 16.0,
-                                  top: 8,
-                                  bottom: 8,
-                                ),
-                                child: Text('Fashion designer'),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  registrationTypeOffstage = true;
-                                  businessTypeOffstage = true;
-                                  businessType = 'E-commerce owner';
-                                });
-                              },
-                              child: const Padding(
-                                padding: EdgeInsets.only(
-                                  left: 16.0,
-                                  top: 8,
-                                  bottom: 8,
-                                ),
-                                child: Text('E-commerce owner'),
-                              ),
-                            ),
-                          ],
-                        ),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Business type',
                       ),
                     ),
                     const SizedBox(

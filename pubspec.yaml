@@ -10,15 +10,13 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.7
-  multi_select_flutter: ^4.1.3
 
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
-asset:
-  -assets/
+asset: -assets/
 
 flutter:
   uses-material-design: true
